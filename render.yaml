@@ -1,0 +1,20 @@
+# render.yaml — конфигурация для автоматического деплоя на Render.com
+# Render прочитает этот файл сам, когда вы подключите репозиторий.
+# Все переменные ниже нужно будет заполнить в панели Render (Environment).
+
+services:
+  - type: web
+    name: techstore-backend
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn server:app --bind 0.0.0.0:$PORT --workers 1"
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        value: "1398884"
+      - key: ADMIN_SECRET
+        sync: false
+      - key: SHOP_URL
+        sync: false
